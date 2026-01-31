@@ -21,15 +21,17 @@ RUN apt-get update && apt-get install -y \
 RUN add-apt-repository ppa:deadsnakes/ppa -y && \
     apt-get update && apt-get install -y \
     python3.10 \
-    python3-distutils \
+    python3.10-distutils \
     && rm -rf /var/lib/apt/lists/*
 
 # pip for python3.10
-RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
+RUN curl -sS https://bootstrap.pypa.io/get-pip.py | /usr/bin/python3.10
+
 RUN ln -sf /usr/bin/python3.10 /usr/bin/python3
 RUN ln -sf /usr/bin/python3.10 /usr/bin/python
 
 RUN python -m pip install --upgrade pip
+
 
 # -----------------------
 # PyTorch (CUDA 11.3)
